@@ -42,7 +42,7 @@ Once you've succesully registered, you'll be redirected to your first 5 predeter
 You can then proceed onto ticking off the first tasks, creating new tasks, and deleting ones that are no longer needed. 
 
 Ticking off your first task is as simple as clicking the button "Done". We expect the tasks to be demanding, therefore a task cannot be completed more than once within your chosen periodicity (daily or weekly).
-If you are have followed the routine for your task, a message will apppear and your current streak will increase. If not, another message will appear as a reminder and your current streak goes back to one. The longest streak states what is the maximum recorded tally for a completed task.
+If you have followed the routine for your task, a message will apppear and your current streak will increase. If not, another message will appear as a reminder and your current streak goes back to one. The longest streak states what is the maximum recorded tally for a completed task.
 
 On the upper right hand side of the page, you can customize your training and add a new task. Just input a name for the new task (such as "Gym"), a description (optional), and your desired routine (daily or weekly).
 
