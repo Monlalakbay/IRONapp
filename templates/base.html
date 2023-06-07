@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        
+        <!-- Django static file -->
+        {% load static %}
+
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <link rel="shortcut icon" href="" type="image/png" />
+        
+        <title>
+            {% block title %}	
+            {% endblock %}
+        </title>
+
+
+        
+        <!-- jQuery/ajax -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+
+
+        <!-- semantic UI -->
+        <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+        <!--Custom css-->
+        <link rel="stylesheet" type="text/css" href={% static 'style.css' %}>
+        {% block style %}
+        {% endblock %}
+        
+
+        <!-- custom top js -->
+        {% block top_script %}
+        {% endblock %}
+        
+
+    </head>
+
+
+
+    <!-- Habit -->
+    {% url 'habit-list' as path_to_habit_list %}               <!-- {{path_to_habit_list}} -->
+   
+
+
+
+    <body>
+    
+        
+        <!-- <div class="ui  container"> -->
+            <div class="ui container">
+                {% include 'main/navbar.html' %}
+
+
+
+            {% block content %}
+            {% endblock content %}
+            </div>
+        <!-- </div>  -->
+
+        {% include 'main/footer.html' %}
+        
+
+
+        <!-- Chart.js -->
+        <!-- https://www.chartjs.org/ -->
+        <!-- https://cdnjs.com/libraries/Chart.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" ></script>
+
+        
+        <!--Custom js ADD-->
+        <script type="text/javascript" src={% static 'main.js' %}></script>
+        {% block bottom_script %}
+        {% endblock %}
+
+        {% block script %}
+        {% endblock %}
+
+        {% block scripts %}
+        {% endblock %}
+
+    <script>
+function makeTimer() {
+   var endTime=new Date({{ daterun|date:"U" }} * 1000);
+    endTime = (Date.parse(endTime) / 1000);
+
+        var now = new Date();
+        now = (Date.parse(now) / 1000);
+
+        var timeLeft = endTime - now;
+
+        var days = Math.floor(timeLeft / 86400);
+        var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+        var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+        var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+        if (hours < "10") { hours = "0" + hours; }
+        if (minutes < "10") { minutes = "0" + minutes; }
+        if (seconds < "10") { seconds = "0" + seconds; }
+
+        $("#days").html(days + "<span>Days</span>");
+        $("#hours").html(hours + "<span>Hours</span>");
+        $("#minutes").html(minutes + "<span>Minutes</span>");
+        $("#seconds").html(seconds + "<span>Seconds</span>");
+
+}
+
+setInterval(function() { makeTimer(); }, 1000);
+</script>
+        
+    </body>
+</html>

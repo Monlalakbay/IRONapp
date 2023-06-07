@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Habit{% endblock title %}
+
+{% block content %}
+<div class="ui grid">
+    <div class="five wide column">
+     <h2>Daily</h2>
+        {% for obj in qs_d %}
+
+            <div class="ui fluid card">
+                <div class="content">
+                    <div class="right floated meta">
+                        <div class="ui grid">
+                            <div class="row">
+                                {% if request.user == obj.author.user %}
+                                    <form action="" method="POST" class='ui form' enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <button type='submit' name="submit_t_form" value={{obj.id}} class="ui positive button w-full mt-5">Done</button>
+                                    </form>
+                                    <a href="{% url 'habit-delete' obj.pk %}"><button class="ui icon button bwhite-lg "><i class="trash icon"></i></button></a>
+                                {% endif %}
+                                <div class="right floated">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p> Date created: </p>
+                    <p> {{ obj.created|date:"l, d F Y"}} </p>
+                </div>
+
+                <div class="content">
+                    <p> <h3>{{ obj.name }}</h3> </p>
+                    <p> {{ obj.description }} </p>
+                    <p> Current Streak: {{ obj.cur_streak}}  </p>
+                    <p> Longest Streak: {{ obj.max_streak}}  </p>
+
+
+
+                </div>
+                <div class="extra content">
+                    <div class="mb-5"></div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+  <div class="five wide column">
+  <h2>Weekly</h2>
+        {% for obj in qs_w %}
+
+            <div class="ui fluid card">
+                <div class="content">
+                    <div class="right floated meta">
+                        <div class="ui grid">
+                            <div class="row">
+                                {% if request.user == obj.author.user %}
+                                    <form action="" method="POST" class='ui form' enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <button type='submit' name="submit_t_form" value={{obj.id}} class="ui positive button w-full mt-5">Done</button>
+                                    </form>
+                                    <a href="{% url 'habit-delete' obj.pk %}"><button class="ui icon button bwhite-lg "><i class="trash icon"></i></button></a>
+                                {% endif %}
+                                <div class="right floated">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p> Date created: </p>
+                    <p> {{ obj.created|date:"l, d F Y"}} </p>
+
+                </div>
+
+                <div class="content">
+                    <p> <h3>{{ obj.name }}</h3> </p>
+                    <p> {{ obj.description }} </p>
+                    <p> Current Streak: {{ obj.cur_streak}}  </p>
+                    <p> Longest Streak: {{ obj.max_streak}}  </p>
+
+                </div>
+
+                <div class="extra content">
+                    <div class="mb-5"></div>
+
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="six wide column">
+        <div class="ui segment">
+            {% include 'main/messages.html' %}
+            <form action="" method="POST" class='ui form' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{h_form}}
+                <button type='submit' name="submit_h_form" class="ui positive button w-full mt-5">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    $( document ).ready(function() {
+        let display = false
+        $(".cmt_btn").click(function () {
+            if (display===false) {
+                $(this).next(".comment-box").show("slow");
+                display=true
+            } else {
+                $(this).next(".comment-box").hide("slow");
+                display=false
+            }  
+        });
+    });
+</script>
+{% endblock scripts %}

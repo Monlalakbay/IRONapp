@@ -1,0 +1,23 @@
+{% if messages %}
+  {% for message in messages %}
+    <div class="ui {{message.tags}} message">
+
+      <i class="close icon" id="massage_close"></i>
+      <div class="header">
+        {{message}}
+      </div>
+
+    </div>
+    <script>
+
+      $('.message .close')
+        .on('click', function() {
+          $(this)
+            .closest('.message')
+            .transition('fade')
+          ;
+        })
+      ;
+    </script> 
+  {% endfor %}
+{% endif %}
